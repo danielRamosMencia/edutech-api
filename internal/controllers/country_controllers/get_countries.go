@@ -18,13 +18,16 @@ func GetCountries(c *fiber.Ctx) error {
 	countries, status, message, err := country_services.SelectCountries(ctx, pagination)
 	if err != nil {
 		return c.Status(status).JSON(fiber.Map{
-			"message": message,
-			"error":   err.Error(),
+			"error": message,
+			"code":  "country-err-000",
 		})
 	}
 
 	return c.Status(status).JSON(fiber.Map{
-		"message": message,
-		"records": countries,
+		"message":       message,
+		"records":       countries,
+		"page":          pagination.Offset/pagination.Limit + 1,
+		"page_size":     pagination.Limit,
+		"total_records": len(countries),
 	})
 }

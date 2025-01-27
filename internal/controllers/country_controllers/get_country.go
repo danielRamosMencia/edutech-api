@@ -18,7 +18,7 @@ func GetCountry(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(status).JSON(fiber.Map{
 			"message": message,
-			"error":   err.Error(),
+			"code":    "country-err-001",
 		})
 	}
 
