@@ -10,11 +10,11 @@
 1. Clone the repository.
 
 ```sh
-git clone git@github.com:danielRamosMencia/consunet-api.git
+git clone git@github.com:danielRamosMencia/edutech-api.git
 ```
 
 ```sh
-git clone https://github.com/danielRamosMencia/consunet-api.git
+git clone https://github.com/danielRamosMencia/edutech-api.git
 
 ```
 

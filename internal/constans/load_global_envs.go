@@ -3,6 +3,7 @@ package constans
 import (
 	"log"
 	"os"
+	"strconv"
 	"sync"
 
 	"github.com/joho/godotenv"
@@ -16,6 +17,8 @@ type GlobalEnvs struct {
 	DBUser      string
 	DBPassword  string
 	DBName      string
+	JwtSecret   string
+	JwtTime     int
 }
 
 var (
@@ -31,6 +34,12 @@ func LoadGlobalEnvs() GlobalEnvs {
 			log.Fatal("Error loading .env file", err)
 		}
 
+		rawjwtTime := os.Getenv("JWT_TIME")
+		jwtTime, err := strconv.Atoi(rawjwtTime)
+		if err != nil {
+			log.Fatal("Error converting JWT_TIME to int", err)
+		}
+
 		Envs = GlobalEnvs{
 			ServerPort:  os.Getenv("SERVER_PORT"),
 			Environment: os.Getenv("ENVIRONMENT"),
@@ -39,6 +48,8 @@ func LoadGlobalEnvs() GlobalEnvs {
 			DBUser:      os.Getenv("DB_USER"),
 			DBPassword:  os.Getenv("DB_PASSWORD"),
 			DBName:      os.Getenv("DB_NAME"),
+			JwtSecret:   os.Getenv("JWT_SECRET"),
+			JwtTime:     jwtTime,
 		}
 	})
 
