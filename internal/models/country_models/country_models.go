@@ -14,3 +14,19 @@ type Country struct {
 	CreatedAt  time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at" db:"updated_at"`
 }
+
+type CreateCoutry struct {
+	Name   string `json:"name" validate:"required"`
+	Active bool   `json:"active"`
+	A2     string `json:"A2" validate:"required,len=2"`
+	A3     string `json:"A3" validate:"required,len=3"`
+	Code   string `json:"code" validate:"required,len=3"`
+}
+
+type UpdateCountry struct {
+	Name   string `json:"name" validate:"required"`
+	Active bool   `json:"active"`
+	A2     string `json:"A2" validate:"required,len=2"`
+	A3     string `json:"A3" validate:"required,len=3"`
+	Code   string `json:"code" validate:"required,len=3"`
+}

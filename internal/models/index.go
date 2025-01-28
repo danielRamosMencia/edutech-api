@@ -24,3 +24,9 @@ type SessionData struct {
 	Role        string                `json:"role" db:"role"`
 	Permissions *[]SessionPermissions `json:"permissions" db:"permissions"`
 }
+
+type CatalogOption struct {
+	Id   string `json:"id" db:"id"`
+	Name string `json:"name" db:"name"`
+	Code string `json:"code" db:"code"`
+}
