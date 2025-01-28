@@ -15,7 +15,25 @@ import (
 
 func SelectSessionData(ctx context.Context, input auth_models.Login) (models.SessionData, int, string, error) {
 	var sessionData models.SessionData
+	var permissions []models.SessionPermissions
 	var storedPassword string
+
+	trx, err := db.Connx.BeginTx(ctx, nil)
+	if err != nil {
+		zap_logger.Logger.Info("Error initializing transaction", zap.Error(err))
+		return sessionData, 500, ErrSelectUser, err
+	}
+
+	defer func() {
+		if p := recover(); p != nil {
+			trx.Rollback()
+			panic(p)
+		} else if err != nil {
+			trx.Rollback()
+		} else {
+			err = trx.Commit()
+		}
+	}()
 
 	const query = `
 	SELECT
@@ -35,13 +53,13 @@ func SelectSessionData(ctx context.Context, input auth_models.Login) (models.Ses
 	LIMIT 1;
 	`
 
-	row := db.Connx.QueryRowContext(
+	row := trx.QueryRowContext(
 		ctx,
 		query,
 		input.Username,
 		input.Email,
 	)
-	err := row.Scan(
+	err = row.Scan(
 		&sessionData.Id,
 		&sessionData.Username,
 		&sessionData.Email,
@@ -68,6 +86,41 @@ func SelectSessionData(ctx context.Context, input auth_models.Login) (models.Ses
 		zap_logger.Logger.Info("Error comparing password =>", zap.Error(err))
 		return sessionData, 401, BadPassword, err
 	}
+
+	const permissionsQuery = `
+	SELECT
+		"P"."id",
+		"P"."name",
+		"P"."code"
+	FROM 
+		"RolePermissions" AS "RP"
+	JOIN 
+		"Permission" AS "P" ON "RP"."permission_id" = "P"."id"
+	WHERE
+		"RP"."role_id" = $1;
+	`
+
+	rows, err := trx.QueryContext(ctx, permissionsQuery, sessionData.RoleId)
+	if err != nil {
+		zap_logger.Logger.Info("Error selecting permissions =>", zap.Error(err))
+		return sessionData, 500, ErrSelectUser, err
+	}
+
+	for rows.Next() {
+		var permission models.SessionPermissions
+		err = rows.Scan(
+			&permission.PermissionId,
+			&permission.Permission,
+			&permission.Code,
+		)
+		if err != nil {
+			zap_logger.Logger.Info("Error scanning permissions =>", zap.Error(err))
+			return sessionData, 500, ErrSelectUser, err
+		}
+		permissions = append(permissions, permission)
+	}
+
+	sessionData.Permissions = &permissions
 
 	return sessionData, 200, Sucess, nil
 }

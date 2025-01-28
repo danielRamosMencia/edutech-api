@@ -6,6 +6,7 @@ import (
 	"github.com/danielRamosMencia/edutech-api/internal/constans"
 	"github.com/danielRamosMencia/edutech-api/internal/models/auth_models"
 	"github.com/danielRamosMencia/edutech-api/internal/services/auth_services"
+	"github.com/danielRamosMencia/edutech-api/internal/utils"
 	"github.com/danielRamosMencia/edutech-api/internal/validations"
 	"github.com/gofiber/fiber/v2"
 )
@@ -40,8 +41,25 @@ func SignIn(c *fiber.Ctx) error {
 		})
 	}
 
+	token, maxAge, err := utils.GenerateJWT(sessionData)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Inautorizado",
+			"code":  "auth-err-000",
+		})
+	}
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "token",
+		Value:    token,
+		Path:     "/",
+		HTTPOnly: true,
+		MaxAge:   int(maxAge),
+		SameSite: fiber.CookieSameSiteLaxMode,
+	})
+
 	return c.Status(status).JSON(fiber.Map{
-		"message":     message,
+		"token":       token,
 		"sessionData": sessionData,
 	})
 }
