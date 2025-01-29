@@ -19,7 +19,7 @@ func PatchDepartment(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Inautorizado",
-			"code":  "department-err-002",
+			"code":  "department-err-004",
 		})
 	}
 
@@ -28,7 +28,7 @@ func PatchDepartment(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "Campos para solicitud de actualizar departamento incorrectos",
-			"code":  "department-err-002",
+			"code":  "department-err-004",
 		})
 	}
 
@@ -36,7 +36,7 @@ func PatchDepartment(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": message,
-			"code":  "department-err-002",
+			"code":  "department-err-004",
 		})
 	}
 
@@ -46,7 +46,7 @@ func PatchDepartment(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(status).JSON(fiber.Map{
 			"error": message,
-			"code":  "department-err-002",
+			"code":  "department-err-004",
 		})
 	}
 
