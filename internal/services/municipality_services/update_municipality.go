@@ -2,6 +2,7 @@ package municipality_services
 
 import (
 	"context"
+	"errors"
 
 	"github.com/danielRamosMencia/edutech-api/internal/db"
 	"github.com/danielRamosMencia/edutech-api/internal/models/municipality_models"
@@ -41,7 +42,7 @@ func UpdateMunicipality(ctx context.Context, municipalityId string, input munici
 	row, err := result.RowsAffected()
 	switch {
 	case row == 0:
-		return 404, NotFound, nil
+		return 404, NotFound, errors.New("municipality not found")
 	case err != nil:
 		zap_logger.Logger.Info("Error updating municipality =>", zap.Error(err))
 		return 500, ErrUpdate, err

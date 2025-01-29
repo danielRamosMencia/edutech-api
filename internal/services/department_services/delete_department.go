@@ -2,6 +2,7 @@ package department_services
 
 import (
 	"context"
+	"errors"
 
 	"github.com/danielRamosMencia/edutech-api/internal/db"
 	"github.com/danielRamosMencia/edutech-api/internal/zap_logger"
@@ -24,7 +25,7 @@ func DeleteDepartment(ctx context.Context, departmentId string) (int, string, er
 	row, err := result.RowsAffected()
 	switch {
 	case row == 0:
-		return 404, NotFound, nil
+		return 404, NotFound, errors.New("department not found")
 	case err != nil:
 		zap_logger.Logger.Info("Error deleting department =>", zap.Error(err))
 		return 500, ErrDelete, err

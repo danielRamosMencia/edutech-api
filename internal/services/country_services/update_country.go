@@ -2,6 +2,7 @@ package country_services
 
 import (
 	"context"
+	"errors"
 
 	"github.com/danielRamosMencia/edutech-api/internal/db"
 	"github.com/danielRamosMencia/edutech-api/internal/models/country_models"
@@ -43,7 +44,7 @@ func UpdateCountry(ctx context.Context, input country_models.UpdateCountry, coun
 	row, err := result.RowsAffected()
 	switch {
 	case row == 0:
-		return 404, NotFound, nil
+		return 404, NotFound, errors.New("country not found")
 	case err != nil:
 		zap_logger.Logger.Info("Error updating country =>", zap.Error(err))
 		return 500, ErrUpdate, err
