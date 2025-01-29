@@ -3,13 +3,13 @@ package department_controllers
 import (
 	"context"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/services/department_services"
 	"github.com/gofiber/fiber/v2"
 )
 
 func DeleteDepartment(c *fiber.Ctx) error {
-	ctx, cancel := context.WithTimeout(context.Background(), constans.ContextTimeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), constants.ContextTimeOut)
 	defer cancel()
 
 	departmentId := c.Params("id")

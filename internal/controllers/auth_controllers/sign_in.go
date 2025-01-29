@@ -3,7 +3,7 @@ package auth_controllers
 import (
 	"context"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/models/auth_models"
 	"github.com/danielRamosMencia/edutech-api/internal/services/auth_services"
 	"github.com/danielRamosMencia/edutech-api/internal/utils"
@@ -12,7 +12,7 @@ import (
 )
 
 func SignIn(c *fiber.Ctx) error {
-	ctx, cancel := context.WithTimeout(context.Background(), constans.ContextTimeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), constants.ContextTimeOut)
 	defer cancel()
 
 	var login auth_models.Login

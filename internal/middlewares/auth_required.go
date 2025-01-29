@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -32,7 +32,7 @@ func AuthRequired(c *fiber.Ctx) error {
 			return nil, fmt.Errorf("unexepected sigining method: %s", jwtToken.Header["alg"])
 		}
 
-		return []byte(constans.Envs.JwtSecret), nil
+		return []byte(constants.Envs.JwtSecret), nil
 	})
 	if err != nil {
 		log.Println("Error verifying token: ", err)

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/db"
 	"github.com/danielRamosMencia/edutech-api/internal/middlewares"
 	"github.com/danielRamosMencia/edutech-api/internal/routes"
@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	constans.LoadGlobalEnvs()
+	constants.LoadGlobalEnvs()
 	db.ConnectDatabase()
 	validations.InitValidator()
 	zap_logger.InitLogger()
@@ -29,7 +29,7 @@ func main() {
 
 	routes.AppRoutes(app)
 
-	app.Listen(constans.Envs.ServerPort)
+	app.Listen(constants.Envs.ServerPort)
 
 	fmt.Println("Hello, World!")
 }

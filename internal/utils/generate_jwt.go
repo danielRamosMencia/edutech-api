@@ -3,7 +3,7 @@ package utils
 import (
 	"time"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/models"
 	"github.com/danielRamosMencia/edutech-api/internal/zap_logger"
 	"github.com/golang-jwt/jwt/v5"
@@ -12,7 +12,7 @@ import (
 
 func GenerateJWT(data models.SessionData) (string, int64, error) {
 	now := time.Now()
-	exp := now.Add(time.Hour * time.Duration(constans.Envs.JwtTime)).Unix()
+	exp := now.Add(time.Hour * time.Duration(constants.Envs.JwtTime)).Unix()
 	iat := now.Unix()
 	nbf := now.Unix()
 	maxAge := exp - iat
@@ -31,7 +31,7 @@ func GenerateJWT(data models.SessionData) (string, int64, error) {
 	claims["role_id"] = data.RoleId
 	claims["role"] = data.Role
 
-	signedToken, err := token.SignedString([]byte(constans.Envs.JwtSecret))
+	signedToken, err := token.SignedString([]byte(constants.Envs.JwtSecret))
 	if err != nil {
 		zap_logger.Logger.Info("Error creating token", zap.Error(err))
 		return "", 0, err

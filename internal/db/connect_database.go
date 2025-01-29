@@ -7,8 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
-
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	_ "github.com/lib/pq"
 )
 
@@ -23,11 +22,11 @@ func ConnectDatabase() *sql.DB {
 
 		dsn := fmt.Sprintf(
 			"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-			constans.Envs.DBHost,
-			constans.Envs.DBPort,
-			constans.Envs.DBUser,
-			constans.Envs.DBPassword,
-			constans.Envs.DBName,
+			constants.Envs.DBHost,
+			constants.Envs.DBPort,
+			constants.Envs.DBUser,
+			constants.Envs.DBPassword,
+			constants.Envs.DBName,
 		)
 
 		Connx, err = sql.Open("postgres", dsn)

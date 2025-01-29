@@ -3,14 +3,14 @@ package country_controllers
 import (
 	"context"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/helpers"
 	"github.com/danielRamosMencia/edutech-api/internal/services/country_services"
 	"github.com/gofiber/fiber/v2"
 )
 
 func GetCountries(c *fiber.Ctx) error {
-	ctx, cancel := context.WithTimeout(context.Background(), constans.ContextTimeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), constants.ContextTimeOut)
 	defer cancel()
 
 	pagination := helpers.MapPagination(c)

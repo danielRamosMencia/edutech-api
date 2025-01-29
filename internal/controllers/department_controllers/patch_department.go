@@ -3,7 +3,7 @@ package department_controllers
 import (
 	"context"
 
-	"github.com/danielRamosMencia/edutech-api/internal/constans"
+	"github.com/danielRamosMencia/edutech-api/internal/constants"
 	"github.com/danielRamosMencia/edutech-api/internal/helpers"
 	"github.com/danielRamosMencia/edutech-api/internal/models"
 	"github.com/danielRamosMencia/edutech-api/internal/services/department_services"
@@ -12,7 +12,7 @@ import (
 )
 
 func PatchDepartment(c *fiber.Ctx) error {
-	ctx, cancel := context.WithTimeout(context.Background(), constans.ContextTimeOut)
+	ctx, cancel := context.WithTimeout(context.Background(), constants.ContextTimeOut)
 	defer cancel()
 
 	sessionData, err := helpers.GetClaims(c)
