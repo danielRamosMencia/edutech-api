@@ -28,7 +28,8 @@ func SelectCountry(ctx context.Context, countryId string) (country_models.Countr
 	FROM 
 		"Country"
 	WHERE
-		"id" = $1;
+		"id" = $1
+	LIMIT 1;
 	`
 
 	row := db.Connx.QueryRowContext(ctx, query, countryId)

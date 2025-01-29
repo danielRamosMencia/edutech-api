@@ -1,25 +1,24 @@
-package municipality_services
+package district_services
 
 import (
 	"context"
 
 	"github.com/danielRamosMencia/edutech-api/internal/db"
-	"github.com/danielRamosMencia/edutech-api/internal/models/municipality_models"
+	"github.com/danielRamosMencia/edutech-api/internal/models/district_models"
 	"github.com/danielRamosMencia/edutech-api/internal/zap_logger"
 	"go.uber.org/zap"
 )
 
-func UpdateMunicipality(ctx context.Context, municipalityId string, input municipality_models.UpdateMunicipality, author string) (int, string, error) {
+func UpdateDistrict(ctx context.Context, input district_models.UpdateDistrict, districtId string, author string) (int, string, error) {
 	const query = `
-	UPDATE "Municipality" 
-	SET 
-		"name" = $1, 
+	UPDATE "District" SET
+		"name" = $1,
 		"code" = $2,
 		"active" = $3,
-		"department_id" = $4,
-		"modified_by" = $5,
+		"modified_by" = $4,
 		"updated_at" = CURRENT_TIMESTAMP
-	WHERE "id" = $6;
+	WHERE
+		"id" = $5;
 	`
 
 	result, err := db.Connx.ExecContext(
@@ -28,13 +27,12 @@ func UpdateMunicipality(ctx context.Context, municipalityId string, input munici
 		input.Name,
 		input.Code,
 		input.Active,
-		input.DepartmentId,
 		author,
-		municipalityId,
+		districtId,
 	)
 
 	if err != nil {
-		zap_logger.Logger.Info("Error updating municipality =>", zap.Error(err))
+		zap_logger.Logger.Info("Error updating district =>", zap.Error(err))
 		return 500, ErrUpdate, err
 	}
 
@@ -43,7 +41,7 @@ func UpdateMunicipality(ctx context.Context, municipalityId string, input munici
 	case row == 0:
 		return 404, NotFound, nil
 	case err != nil:
-		zap_logger.Logger.Info("Error updating municipality =>", zap.Error(err))
+		zap_logger.Logger.Info("Error updating district =>", zap.Error(err))
 		return 500, ErrUpdate, err
 	}
 

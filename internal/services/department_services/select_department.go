@@ -30,7 +30,8 @@ func SelectDepartment(ctx context.Context, departmentId string) (department_mode
 	INNER JOIN 
 		"Country" AS "C" ON "D"."country_id" = "C"."id"
 	WHERE
-		"D"."id" = $1;
+		"D"."id" = $1
+	LIMIT 1;
 	`
 
 	row := db.Connx.QueryRowContext(ctx, query, departmentId)
