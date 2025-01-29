@@ -19,12 +19,12 @@ type CreateDepartment struct {
 	Name      string `json:"name" validate:"required"`
 	Code      string `json:"code" validate:"required,len=2"`
 	Active    bool   `json:"active"`
-	CountryId string `json:"country_id" validate:"required,len=32"`
+	CountryId string `json:"country_id" validate:"required"`
 }
 
 type UpdateDeparment struct {
 	Name      string `json:"name" validate:"required"`
 	Code      string `json:"code" validate:"required,len=2"`
 	Active    bool   `json:"active"`
-	CountryId string `json:"country_id" validate:"required,len=32"`
+	CountryId string `json:"country_id" validate:"required"`
 }

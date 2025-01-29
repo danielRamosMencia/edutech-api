@@ -13,8 +13,8 @@ func SetDepartmentRoutes(router fiber.Router) {
 	r.Get("/", department_controllers.GetDepartments)
 	r.Get("/options", department_controllers.GetDepartmentOptions)
 	r.Get("/:id", department_controllers.GetDepartment)
-	// r.Post("/", department_controllers.PostDepartment)
-	// r.Put("/:id", department_controllers.PutDepartment)
-	// r.Patch("/:id", department_controllers.PatchDepartment)
-	// r.Delete("/:id", department_controllers.DeleteDepartment)
+	r.Post("/", department_controllers.PostDepartment)
+	r.Put("/:id", department_controllers.PutDepartment)
+	r.Patch("/:id", department_controllers.PatchDepartment)
+	r.Delete("/:id", department_controllers.DeleteDepartment)
 }
