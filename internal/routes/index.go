@@ -4,6 +4,7 @@ import (
 	"github.com/danielRamosMencia/edutech-api/internal/routes/auth_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/country_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/department_routes"
+	muncipality_routes "github.com/danielRamosMencia/edutech-api/internal/routes/municipality_routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/helmet"
@@ -35,4 +36,5 @@ func AppRoutes(app *fiber.App) {
 	country_routes.SetCountryRoutes(v1)
 	auth_routes.SetAuthRoutes(v1)
 	department_routes.SetDepartmentRoutes(v1)
+	muncipality_routes.SetMunicipalityRoutes(v1)
 }
