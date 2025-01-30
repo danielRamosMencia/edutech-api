@@ -15,15 +15,15 @@ type Grade struct {
 }
 
 type CreateGrade struct {
-	Name        string `json:"name" db:"name"`
-	Code        string `json:"code" db:"code"`
+	Name        string `json:"name" db:"name" validate:"required"`
+	Code        string `json:"code" db:"code" validate:"required"`
 	Active      bool   `json:"active" db:"active"`
-	GradeNumber int    `json:"grade_number" db:"grade_number"`
+	GradeNumber int    `json:"grade_number" db:"grade_number" validate:"required,gte=1"`
 }
 
 type UpdateGrade struct {
-	Name        string `json:"name" db:"name"`
-	Code        string `json:"code" db:"code"`
+	Name        string `json:"name" db:"name" validate:"required"`
+	Code        string `json:"code" db:"code" validate:"required"`
 	Active      bool   `json:"active" db:"active"`
-	GradeNumber int    `json:"grade_number" db:"grade_number"`
+	GradeNumber int    `json:"grade_number" db:"grade_number" validate:"required,gte=1"`
 }

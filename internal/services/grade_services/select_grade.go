@@ -44,7 +44,7 @@ func SelectGrade(ctx context.Context, gradeId string) (grade_models.Grade, int, 
 	)
 
 	switch {
-	case err != sql.ErrNoRows:
+	case err == sql.ErrNoRows:
 		return grade, 404, NotFound, err
 	case err != nil:
 		zap_logger.Logger.Info("Error selecting grade =>", zap.Error(err))
