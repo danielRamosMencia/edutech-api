@@ -31,5 +31,5 @@ func UnassignSignature(ctx context.Context, recordId string, gradeId string) (in
 		return 500, ErrUnassign, err
 	}
 
-	return 200, "Signature unassigned successfully", nil
+	return 200, SuccessUnassign, nil
 }

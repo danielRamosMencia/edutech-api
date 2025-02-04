@@ -15,6 +15,5 @@ type GradeSignatures struct {
 }
 
 type AssignSignature struct {
-	GradeId     string `json:"grade_id" db:"grade_id" validate:"required"`
 	SignatureId string `json:"signature_id" db:"signature_id" validate:"required"`
 }

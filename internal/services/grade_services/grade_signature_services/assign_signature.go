@@ -10,7 +10,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func AssignSignature(ctx context.Context, input grade_models.AssignSignature, author string) (int, string, error) {
+func AssignSignature(ctx context.Context, input grade_models.AssignSignature, gradeId string, author string) (int, string, error) {
 	const query = `
 	INSERT INTO "GradeSignatures" (
 		"id", 
@@ -29,11 +29,13 @@ func AssignSignature(ctx context.Context, input grade_models.AssignSignature, au
 
 	id := utils.GenerateId()
 
+	zap_logger.Logger.Info("Assigning signature =>", zap.String("gradeId", gradeId))
+
 	_, err := db.Connx.ExecContext(
 		ctx,
 		query,
 		id,
-		input.GradeId,
+		gradeId,
 		input.SignatureId,
 		author,
 	)
