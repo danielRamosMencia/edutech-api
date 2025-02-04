@@ -11,6 +11,6 @@ const (
 	SuccessActivated    = "Asignatura activada exitosamente"
 	SuccessDelete       = "Asignatura eliminada exitosamente"
 	SuccessDesactivated = "Asignatura desactivada exitosamente"
-	SuccessInsert       = "Asignaturas creada exitosamente"
+	SuccessInsert       = "Asignatura creada exitosamente"
 	SuccessUpdate       = "Asignatura actualizada exitosamente"
 )

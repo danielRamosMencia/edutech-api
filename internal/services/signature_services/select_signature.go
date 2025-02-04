@@ -6,13 +6,15 @@ import (
 
 	"github.com/danielRamosMencia/edutech-api/internal/db"
 	"github.com/danielRamosMencia/edutech-api/internal/models/signature_models"
+	"github.com/danielRamosMencia/edutech-api/internal/zap_logger"
+	"go.uber.org/zap"
 )
 
 func SelectSignature(ctx context.Context, signatureId string) (signature_models.Signature, int, string, error) {
 	var signature signature_models.Signature
 
 	const query = `
-	SELECT TOP 1
+	SELECT
 		"id", 
 		"name",
 		"code",
@@ -24,7 +26,8 @@ func SelectSignature(ctx context.Context, signatureId string) (signature_models.
 	FROM 
 		"Signature"
 	WHERE
-		"id" = $1;
+		"id" = $1
+	LIMIT 1;
 	`
 
 	row := db.Connx.QueryRowContext(ctx, query, signatureId)
@@ -43,6 +46,7 @@ func SelectSignature(ctx context.Context, signatureId string) (signature_models.
 	case err == sql.ErrNoRows:
 		return signature, 404, NotFound, err
 	case err != nil:
+		zap_logger.Logger.Info("Error selecting signature =>", zap.Error(err))
 		return signature, 500, ErrSelectSignature, err
 	}
 

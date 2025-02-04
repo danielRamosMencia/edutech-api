@@ -10,13 +10,14 @@ import (
 )
 
 func ActiveSignature(ctx context.Context, active bool, signatureId string, author string) (int, string, error) {
+	var message string
 	const query = `
 	UPDATE "Signature" SET
 		"active" = $1,
 		"modified_by" = $2,
 		"updated_at" = CURRENT_TIMESTAMP
 	WHERE
-		"id" = $2;
+		"id" = $3;
 	`
 
 	result, err := db.Connx.ExecContext(
@@ -41,5 +42,11 @@ func ActiveSignature(ctx context.Context, active bool, signatureId string, autho
 		return 500, ErrUpdate, err
 	}
 
-	return 200, Success, nil
+	if active {
+		message = SuccessActivated
+	} else {
+		message = SuccessDesactivated
+	}
+
+	return 200, message, nil
 }

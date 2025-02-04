@@ -10,7 +10,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func UpdateSignature(ctx context.Context, input signature_models.UpdateSignature, signatureId string, author string) (int, string, error) {
+func UpdateSignature(ctx context.Context, signatureId string, input signature_models.UpdateSignature, author string) (int, string, error) {
 	const query = `
 	UPDATE "Signature" SET
 		"name" = $1,
@@ -46,5 +46,5 @@ func UpdateSignature(ctx context.Context, input signature_models.UpdateSignature
 		return 500, ErrUpdate, err
 	}
 
-	return 200, Success, nil
+	return 200, SuccessUpdate, nil
 }
