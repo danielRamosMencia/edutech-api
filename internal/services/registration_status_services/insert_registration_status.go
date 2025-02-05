@@ -26,8 +26,8 @@ func InsertRegistrationStatus(ctx context.Context, input registration_status_mod
 		$3,
 		$4,
 		$5,
-		CURRENT_TIMESTAMP(),
-		CURRENT_TIMESTAMP()
+		CURRENT_TIMESTAMP,
+		CURRENT_TIMESTAMP
 	);
 	`
 
