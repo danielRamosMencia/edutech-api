@@ -1,10 +1,10 @@
 package auth_services
 
 const (
-	Sucess         = "Operación exitosa"
+	BadCredentials = "Credenciales incorrectas"
+	BadPassword    = "Contraseña incorrecta"
 	ErrSelectUser  = "Error al obtener el usuario"
 	InactiveUser   = "El usuario no se encuentra activo"
 	NotFound       = "Usuario no encontrado"
-	BadCredentials = "Credenciales incorrectas"
-	BadPassword    = "Contraseña incorrecta"
+	Sucess         = "Operación exitosa"
 )

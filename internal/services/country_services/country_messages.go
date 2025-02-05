@@ -1,16 +1,16 @@
 package country_services
 
 const (
-	Success             = "Operación exitosa"
+	ErrDelete           = "Error al eliminar el país"
+	ErrInsert           = "Error al insertar el país"
 	ErrSelectCountries  = "Error al obtener los países"
 	ErrSelectCountry    = "Error al obtener el país"
-	SuccessInsert       = "País creado exitosamente"
-	ErrInsert           = "Error al insertar el país"
-	SuccessUpdate       = "País actualizado exitosamente"
 	ErrUpdate           = "Error al actualizar el país"
-	SuccessDelete       = "País eliminado exitosamente"
-	ErrDelete           = "Error al eliminar el país"
-	SuccessActivated    = "País activado exitosamente"
-	SuccessDesactivated = "País desactivado exitosamente"
 	NotFound            = "País no encontrado"
+	Success             = "Operación exitosa"
+	SuccessActivated    = "País activado exitosamente"
+	SuccessDelete       = "País eliminado exitosamente"
+	SuccessDesactivated = "País desactivado exitosamente"
+	SuccessInsert       = "País creado exitosamente"
+	SuccessUpdate       = "País actualizado exitosamente"
 )
