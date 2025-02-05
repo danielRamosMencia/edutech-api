@@ -26,3 +26,6 @@ go.work.sum
 
 # air tmp binaries
 tmp/
+
+#sql file to make queries
+query.sql
