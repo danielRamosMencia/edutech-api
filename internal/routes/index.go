@@ -8,6 +8,7 @@ import (
 	"github.com/danielRamosMencia/edutech-api/internal/routes/employee_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/grade_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/municipality_routes"
+	"github.com/danielRamosMencia/edutech-api/internal/routes/portal_user_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/registration_status_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/signature_routes"
 	"github.com/gofiber/fiber/v2"
@@ -49,4 +50,5 @@ func AppRoutes(app *fiber.App) {
 	registration_status_routes.SetRegistrationStatusRoutes(v1)
 	// Entities
 	employee_routes.SetEmployeeRoutes(v1)
+	portal_user_routes.SetPortalUserRoutes(v1)
 }

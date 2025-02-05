@@ -31,7 +31,7 @@ func SelectPortalUsers(ctx context.Context, pagination models.PaginationParams) 
 		"PU"."updated_at"
 	FROM
 		"PortalUser" AS "PU"
-	LEFT JOIN 
+	INNER JOIN 
 		"Employee" AS "E" ON "PU"."employee_id" = "E"."id"
 	INNER JOIN
 		"Role" AS "R" ON "PU"."role_id" = "R"."id"
