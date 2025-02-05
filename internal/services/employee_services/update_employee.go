@@ -66,5 +66,5 @@ func UpdateEmployee(ctx context.Context, employeeId string, input employee_model
 		return 500, ErrUpdate, err
 	}
 
-	return 200, SuccessInsert, nil
+	return 200, SuccessUpdate, nil
 }

@@ -5,6 +5,7 @@ import (
 	"github.com/danielRamosMencia/edutech-api/internal/routes/country_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/department_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/district_routes"
+	"github.com/danielRamosMencia/edutech-api/internal/routes/employee_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/grade_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/municipality_routes"
 	"github.com/danielRamosMencia/edutech-api/internal/routes/registration_status_routes"
@@ -37,6 +38,7 @@ func AppRoutes(app *fiber.App) {
 		return c.SendString("Server ready to Go!")
 	})
 
+	// Catalogs
 	country_routes.SetCountryRoutes(v1)
 	auth_routes.SetAuthRoutes(v1)
 	department_routes.SetDepartmentRoutes(v1)
@@ -45,4 +47,6 @@ func AppRoutes(app *fiber.App) {
 	grade_routes.SetGradeRoutes(v1)
 	signature_routes.SetSignatureRoutes(v1)
 	registration_status_routes.SetRegistrationStatusRoutes(v1)
+	// Entities
+	employee_routes.SetEmployeeRoutes(v1)
 }

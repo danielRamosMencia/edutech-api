@@ -32,11 +32,11 @@ func SelectEmployee(ctx context.Context, employeeId string) (employee_models.Emp
 		"D"."name" AS "department",
 		"I"."id" AS "institution_id",
 		"I"."name" AS "institution",
-		"PU"."id" AS "portal_user"
+		"PU"."username" AS "portal_user",
 		"E"."created_by",
 		"E"."modified_by",
 		"E"."created_at",
-		"E"."modified_at"
+		"E"."updated_at"
 	FROM
 		"Employee" AS "E"
 	INNER JOIN 
@@ -45,7 +45,7 @@ func SelectEmployee(ctx context.Context, employeeId string) (employee_models.Emp
 		"Department" AS "D" ON "M"."department_id" = "D"."id"
 	INNER JOIN 
 		"Institution" AS "I" ON "E"."institution_id" = "I"."id"
-	INNER JOIN 
+	LEFT JOIN 
 		"PortalUser" AS "PU" ON "E"."id" = "PU"."employee_id"
 	WHERE
 		"E"."id" = $1
